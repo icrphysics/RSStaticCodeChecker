@@ -1,0 +1,10 @@
+  - Documentation
+  - Remove some hardcoded values and put into config file
+  - prepare: outsource json reading in separate files
+  - Notepad++ Plugin or VSCode Plugin?
+  - Percentage for command line tool
+  - Multithreading / Processing for check folder
+  
+
+Old RayStation scripts are at:
+http://frp-vm-svn/svn/icr/Clinical/Planning/RayStationScripts/scripting-master

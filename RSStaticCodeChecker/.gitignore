@@ -1,0 +1,5 @@
+WinPython-32bit/*
+WinPython-64bit/*
+
+!WinPython-32bit/README.md
+!WinPython-64bit/README.md

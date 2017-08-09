@@ -1,0 +1,23 @@
+[
+    {
+        "base": "Case.PatientModel",
+        "method": "CreateMaterial",
+        "old_params": [
+        
+        ],
+        "params": [
+            {
+            "name": "BaseOnMaterial"
+            },
+            {
+            "name": "Name"
+            },
+            {
+            "name": "MassDensityOverride"
+            },
+            {
+            "name": "anotherOne"
+            }
+        ]
+    }
+]

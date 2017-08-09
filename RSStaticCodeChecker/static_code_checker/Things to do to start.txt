@@ -1,0 +1,42 @@
+Easiest way to go for new version
+
+Step 1: Generate dummy object templates (RayStation environment needed!)
+
+    ```
+    rmh.test.create_initial.create_initial()
+    ```
+
+    rslOffline can now be used with dummy object templates
+
+Step 2: Initialize the static code checker
+
+    For this the dummy object values will be used
+
+    ```
+    rmh.scriptTesting.static_code_checker.conv.convert_default()
+    ```
+
+Step 3: Execute static code checker
+
+    ```
+    static_code_checker.check_folder.check_folder("C:\\Somewhere\\Maybe", "C:\\Output\\File")
+    ```
+
+
+
+IGNORE LIKE THIS:
+
+#@ignore_error_type(error_type)
+
+error_type can be:
+  - parameter_error:      #@ignore_error_type(parameter_error)
+  - attribute_error:      #@ignore_error_type(attribute_error)
+
+can also be combined with ",":          #@ignore_error_type(attribute_error, parameter_error)
+
+multiple static code scanner commands can be concatenated like this
+
+#@ignore_error_type(attribute_error)|@ignore_error_type(parameter_error)
+
+#@ignore_variable(patient)
+#@ignore_variable(case_list, error_types=[attribute_error])

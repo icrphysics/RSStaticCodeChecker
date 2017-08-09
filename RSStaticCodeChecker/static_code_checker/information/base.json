@@ -1,0 +1,112 @@
+{
+    "Case": [
+        {
+        "regex": "^(C|c)(A|a)(S|s)(E|e)$",
+        "ranking": 0
+        },
+        {
+        "regex": ".*(C|c)(A|a)(S|s)(E|e).*(?<!s)$",
+        "ranking": 1
+        }
+    ],
+    "Patient": [
+        {
+        "regex": "^(P|p)(A|a)(T|t)(I|i)(E|e)(N|n)(T|t)$",
+        "ranking": 0
+        },
+        {
+        "regex": ".*(P|p)(A|a)(T|t)(I|i)(E|e)(N|n)(T|t).*(?<!s)$",
+        "ranking": 1
+        },
+        {
+        "regex": "^(P|p)(A|a)(T|t)$",
+        "ranking": 2
+        },
+        {
+        "regex": ".*(P|p)(A|a)(T|t).*(?<!s)$",
+        "ranking": 3
+        }
+    ],
+    "Examination": [
+        {
+        "regex": "^(E|e)(X|x)(A|a)(M|m)(I|i)(N|n)(A|a)(T|t)(I|i)(O|o)(N|n)$",
+        "ranking": 0
+        },
+        {
+        "regex": ".*(E|e)(X|x)(A|a)(M|m)(I|i)(N|n)(A|a)(T|t)(I|i)(O|o)(N|n).*(?<!s)$",
+        "ranking": 1
+        },
+        {
+        "regex": "^(E|e)(X|x)(A|a)(M|m)$",
+        "ranking": 2
+        },
+        {
+        "regex": ".*(E|e)(X|x)(A|a)(M|m).*(?<!s)$",
+        "ranking": 3
+        }
+    ],
+    "ui": [
+        {
+        "regex": "^(U|u)(I|i)$",
+        "ranking": 0
+        },
+        {
+        "regex": ".*(U|u)(I|i).*(?<!s)$",
+        "ranking": 1
+        }
+    ],
+    "MachineDB": [
+        {
+        "regex": "^machine_?db$",
+        "ranking": 0
+        },
+        {
+        "regex": ".*machine_?db.*(?<!s)$",
+        "ranking": 1
+        }
+    ],
+    "PatientDB":
+    [
+        {
+        "regex": "$(P|p)(A|a)(T|t)(I|i)(E|e)(N|n)(T|t)_?(D|d)(B|b)(?<!s)$",
+        "ranking": 0
+        },
+        {
+        "regex": ".*(P|p)(A|a)(T|t)(I|i)(E|e)(N|n)(T|t)_?(D|d)(B|b).*(?<!s)$",
+        "ranking": 1
+        }
+    ],
+    "Machine":
+    [
+        {
+        "regex": "^(M|m)(A|a)(C|c)(H|h)(I|i)(N|n)(E|e)(?<!s)$",
+        "ranking": 0
+        },
+        {
+        "regex": "(M|m)(A|a)(C|c)(H|h)(I|i)(N|n)(E|e).*(?<!s)$",
+        "ranking": 1
+        }
+    ],
+    "Plan":
+    [
+        {
+        "regex": "^(P|p)(L|l)(A|a)(N|n)$",
+        "ranking": 0
+        },
+        {
+        "regex": "(P|p)(L|l)(A|a)(N|n).*(?<!s)$",
+        "ranking": 1
+        }
+    ],
+    "BeamSet":
+    [
+        {
+        "regex": "^(B|b)(E|e)(A|a)(M|m)_?(S|s)(E|e)(T|t)$",
+        "ranking": 0
+        },
+        {
+        "regex": "(B|b)(E|e)(A|a)(M|m)_?(S|s)(E|e)(T|t).*(?<!s)$",
+        "ranking": 0
+        }
+    ]
+}
