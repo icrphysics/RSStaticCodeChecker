@@ -31,6 +31,8 @@ def find_in_file(file, generate=False):
     return results
 
 def post_processing(results):
+    attribute_base = get_attribute_base()
+    import difflib
     new_results = []
     for result in results:
         new_dict = dict(result)
@@ -42,6 +44,7 @@ def post_processing(results):
                 new_dict["description"] = "The object '{}' is accessed like a list which could cause errors.".format(".".join(error_code.split(".")[:-1]))
             else:
                 new_dict["description"] = "Object '{}' has no attribute '{}'".format(".".join(error_code.split(".")[:-1]), wrong_attribute)
+                new_dict["alternatives"] = difflib.get_close_matches(error_code, attribute_base)
         else:
             #parameter_error
             new_dict["description"] = "You seem to either use wrong or not enough parameters for method '{}(...)'. Check the documentation for further details.".format(error_code.split(".")[-1])
@@ -77,19 +80,31 @@ def find_in_code(code, version=None):
     
     results = []
     import os
-    attribute_base = []
-    wildcards = []
-    package_directory = os.path.dirname(os.path.abspath(__file__))
-    with open(os.path.join(package_directory, 'information', 'all_attributes.json')) as f:
-        attribute_base = json.loads(f.read())
-    with open(os.path.join(package_directory, 'information', 'attr_wildcards.json')) as f:
-        wildcards = json.loads(f.read())
+    attribute_base = get_attribute_base()
+    wildcards = get_wildcards()
+    
+    
     
     results = check_dict_for_attributes(attribute_check_dict, attribute_base, wildcards)
     results.extend(parameter_check(code, parameter_check_dict, print_enabled))
     results = post_processing(results)
     return results
 
+def get_attribute_base():
+    import os
+    package_directory = os.path.dirname(os.path.abspath(__file__))
+    with open(os.path.join(package_directory, 'information', 'all_attributes.json')) as f:
+        attribute_base = json.loads(f.read())
+        return attribute_base
+    return []
+
+def get_wildcards():
+    import os
+    package_directory = os.path.dirname(os.path.abspath(__file__))
+    with open(os.path.join(package_directory, 'information', 'attr_wildcards.json')) as f:
+        wildcards = json.loads(f.read())
+        return wildcards
+    return []
 
 def parameter_check(code, parameter_check_dict, print_enabled=False, returnValue=None):
     """

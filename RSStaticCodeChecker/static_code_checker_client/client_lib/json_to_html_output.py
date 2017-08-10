@@ -17,6 +17,11 @@ def to_html(raw):
         s += "<div class='description attr'>Description: <b>"
         s += result["description"]
         s += "</b></div>"
+        if result.get("alternatives") and len(result.get("alternatives")):
+            s += "<div class='alternatives attr'>Did you mean: <b>"
+            for i, a in enumerate(result.get("alternatives")):
+                s += "</br>.{}".format(a.replace(".[]", "[index]"))
+            s += "</b></div>"
         s += "<div class='line attr'> line: <b>"
         s += str(result["lineno"])
         s += "</b>"
