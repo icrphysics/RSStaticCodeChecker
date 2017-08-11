@@ -35,3 +35,32 @@ The RayStation Code Checker is a static code analyzer that is built for recogniz
 1. Install [Inno Setup](http://www.jrsoftware.org/isinfo.php) on your computer and reboot
 2. Navigate to folder in cmd.exe using the "cd" command
 3. Run "create_setup_exe" (with optional version parameter, e.g. "R6") and wait a few seconds / minutes. The new exe will be in the "Output" folder (one forr x64 and x32).
+
+### Ignore code
+
+Sometimes the code analysis generated false positives (errors that are not actually errors).
+You might want to ignore these types of errors (instead of for example renaming all your variables).
+As an example the variable name "patient_list" will be interpreted as a Patient object which will result in errors when accessing it like a list.
+
+Error types can be ignored in the next line by using this:
+```
+#@ignore_error_type(error_type)
+```
+You can also concatenate error types in this command:
+```
+#@ignore_error_type(attribute_error, parameter_error)
+```
+A variable can be ignored for the whole file by using this:
+```
+#@ignore_variable(patient_list)
+```
+where "patient_list" is the variable to ignore.
+
+A variable can also be ignored only for a specific error types:
+```
+#@ignore_variable(patient_list, error_types=[attribute_error])
+```
+Several macros can be written in one line by separating them with "|".
+```
+#@ignore_error_type(attribute_error)|@ignore_error_type(parameter_error)
+```
