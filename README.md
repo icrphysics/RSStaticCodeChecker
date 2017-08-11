@@ -15,22 +15,23 @@ The static code analysis will detect two types of errors:
 Attribute errors occur when an attribute is accessed that is not contained in the RSStaticCodeChecker database.
 As an example the following line of code would result in an error:
 
-```
+```python
 patient.Plan
 ```
 
-Since the RayStation version 6 the plans are contained within `patient.Cases[index]`. The `Patient` object doesn't have a Plan object anymore.
-It will also detect the usage of indexes like:
+Since the RayStation version 6 the plans are contained within `patient.Cases[index]`. The `Patient` object doesn't have a Plan attribute anymore.
 
-```
+The RSStaticCodeChecker will also detect the usage of indexes like:
+
+```python
 patient["Cases"][0].NonExistantAttribute
 ```
 
-In this example an attribute error for `NonExistantAttribute` would generated as an element in the list `Patient.Cases` doesn't have any attribute with that name.
+In this example an attribute error for `NonExistantAttribute` would be generated as an element in the list `Patient.Cases` doesn't have any attribute with that name.
 
 The RSStaticCodeChecker will also detect when attributes are accessed like a list altough they are a dict / object / method / ... and the other way around.
 
-```
+```python
 patient.Cases[0].PatientModel[0]    #patient.Cases[index].PatientModel is no list
 patient.Cases.Name                  #patient.Cases is a list and therefore has no direct attributes
 ```
@@ -38,11 +39,11 @@ patient.Cases.Name                  #patient.Cases is a list and therefore has n
 ### `parameter_error`
 
 Everytime a RayStation method is used it will be checked if wrong keyword arguments were used.
-If for example an imaginary method called `setPatientName()` used a parameter called `name` in RayStation v5 which was renamed to `patient_name` in v6 a developer could take hours to recognize why the method doesn't have the desired effect.
+If for example an imaginary method called `setPatientName()` used a parameter called `name` in RayStation v5 which was renamed to `patient_name` in v6 a developer could take hours to recognize why the method doesn't have the desired effect. The RSStaticCodeChecker will recognize the error and lead you to the right solution by showing the documentation of the method.
 
 Unfortunately RayStation doesn't document which parameters are optional / mandatory in a proper way.
 That's why the code analysis will also generate errors when you don't define all keyword arguments (no matter if mandatory or optional).
-Sending rather too much errors than too few errors was a decision made because we think ignoring a line takes less time than the time consuming process of starting a RayStation terminal, having an error and then reading all the docs to find the parameter that was missing.
+Sending rather too much errors than too few errors was a decision made because we think ignoring a line takes less time than the time consuming process of starting a RayStation terminal, finding an error and then reading all the docs to find the parameter that was missing.
 The score of these types of errors will be higher (which means less important, see "Score" section for more information).
 Take a look at the "Ignore code" section for further information on how to ignore these lines of code for the RSStaticCodeChecker.
 
@@ -61,8 +62,10 @@ The score contains a mixture of heuristics concerning:
   - The probability of the error to actually be a proper match (e.g. `patient.WrongAttr` has a lower score than `cpat.WrongAttr`)
 
 ## Use the Static Code Checker Client
-### Check folder (requires normal python environment for multiprocessing)
+### Check folder
 1.	`> rs_code_scanner --folder "C:/somewhere/"`
+
+Add a `--processes <p>` argument to define the maximum of processes that may run at the same time.
 
 ### Check file
 1.	`> rs_code_scanner --file "C:/file.py"`
@@ -97,25 +100,25 @@ You might want to ignore these types of errors (instead of for example renaming 
 As an example the variable name `patient_list` will be interpreted as a Patient object which will result in errors when accessing it like a list.
 
 Error types can be ignored in the next line by using this:
-```
+```python
 #@ignore_error_type(error_type)
 ```
 You can also concatenate error types in this command:
-```
+```python
 #@ignore_error_type(attribute_error, parameter_error)
 ```
 A variable can be ignored for the whole file by using this:
-```
+```python
 #@ignore_variable(patient_list)
 ```
 where "patient_list" is the variable to ignore.
 
 A variable can also be ignored only for specific error types:
-```
+```python
 #@ignore_variable(patient_list, error_types=[attribute_error])
 ```
 Several macros can be written in one line by separating them with "|".
-```
+```python
 #@ignore_error_type(attribute_error)|@ignore_error_type(parameter_error)
 ```
 
