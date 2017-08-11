@@ -38,9 +38,9 @@ The RayStation Code Checker is a static code analyzer that is built for recogniz
 
 ### Ignore code
 
-Sometimes the code analysis generated false positives (errors that are not actually errors).
+Sometimes the code analysis generates false positives (errors that are not actually errors).
 You might want to ignore these types of errors (instead of for example renaming all your variables).
-As an example the variable name "patient_list" will be interpreted as a Patient object which will result in errors when accessing it like a list.
+As an example the variable name `patient_list` will be interpreted as a Patient object which will result in errors when accessing it like a list.
 
 Error types can be ignored in the next line by using this:
 ```
@@ -56,7 +56,7 @@ A variable can be ignored for the whole file by using this:
 ```
 where "patient_list" is the variable to ignore.
 
-A variable can also be ignored only for a specific error types:
+A variable can also be ignored only for specific error types:
 ```
 #@ignore_variable(patient_list, error_types=[attribute_error])
 ```
