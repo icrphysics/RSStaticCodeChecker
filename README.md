@@ -61,7 +61,7 @@ The score contains a mixture of heuristics concerning:
   - The probability to cause a crash or wrong behaviour in your runtime environment (e.g. wrongly spelled parameters have a lower score than missing parameters that might be optional anyways)
   - The probability of the error to actually be a proper match (e.g. `patient.WrongAttr` has a lower score than `cpat.WrongAttr`)
 
-## Use the Static Code Checker Client
+## Use the Static Code Checker Client Command Line Tool
 ### Check folder
 1.	`> rs_code_scanner --folder "C:/somewhere/"`
 
@@ -88,10 +88,9 @@ Add a `--processes <p>` argument to define the maximum of processes that may run
 2.	Add `--html` argument and write True behind it
 (e.g. `> rs_code_scanner --folder "C:/somewhere/" --output "C:/results.html" --html True`)
 
-## Deploy to installer exe
-1. Install [Inno Setup](http://www.jrsoftware.org/isinfo.php) on your computer and reboot
-2. Navigate to folder in cmd.exe using the "cd" command
-3. Run "create_setup_exe" (with optional version parameter, e.g. "R6") and wait a few seconds / minutes. The new exe will be in the "Output" folder (one forr x64 and x32).
+### Using the VSCode extension
+
+
 
 ### Ignore code
 
@@ -135,3 +134,8 @@ Base variables are all variables that can be accessed via `rslOffline.get_curren
 If new base variables were added you might want to add variable recognition information to the RSStaticCodeChecker to make it recognize these new base variables as such.
 
 To do so open the RSStaticCodeChecker/static_code_checker/information/base.json file and add an entry that defines regexes that would detect variables of your new base variable type. You can take a look at the already existing base variable recognition information entries. It should be quite easy to copy, paste and adapt to your new base variable. The less probable the match, the higher the `ranking` attribute variable.
+
+## Deploy to installer exe
+1. Install [Inno Setup](http://www.jrsoftware.org/isinfo.php) on your computer and reboot
+2. Navigate to folder in cmd.exe using the "cd" command
+3. Run "create_setup_exe" (with optional version parameter, e.g. "R6") and wait a few seconds / minutes. The new exe will be in the "Output" folder (one forr x64 and x32).
