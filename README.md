@@ -138,4 +138,4 @@ To do so open the RSStaticCodeChecker/static_code_checker/information/base.json 
 ## Deploy to installer exe
 1. Install [Inno Setup](http://www.jrsoftware.org/isinfo.php) on your computer and reboot
 2. Navigate to folder in cmd.exe using the "cd" command
-3. Run "create_setup_exe" (with optional version parameter, e.g. "R6") and wait a few seconds / minutes. The new exe will be in the "Output" folder (one forr x64 and x32).
+3. Run `create_setup_exe` (with optional version parameter, e.g. `"R6"`) and wait a few seconds / minutes. The new exe will be in the `/Output` folder (one for x64 and x32).
