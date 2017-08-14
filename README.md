@@ -19,9 +19,9 @@ As an example the following line of code would result in an error:
 patient.Plan
 ```
 
-Since the RayStation version 6 the plans are contained within `patient.Cases[index]`. The `Patient` object doesn't have a Plan attribute anymore.
+Since the RayStation version 6 the (treatment)plans are contained within `patient.Cases[index]`. The `Patient` object doesn't have a Plan attribute anymore.
 
-The RSStaticCodeChecker will also detect the usage of indexes like:
+The RSStaticCodeChecker will also properly interprete the usage of indexes like:
 
 ```python
 patient["Cases"][0].NonExistantAttribute
@@ -32,17 +32,17 @@ In this example an attribute error for `NonExistantAttribute` would be generated
 The RSStaticCodeChecker will also detect when attributes are accessed like a list altough they are a dict / object / method / ... and the other way around.
 
 ```python
-patient.Cases[0].PatientModel[0]    #patient.Cases[index].PatientModel is no list
-patient.Cases.Name                  #patient.Cases is a list and therefore has no direct attributes
+patient.Cases[0].PatientModel[0]    # patient.Cases[index].PatientModel is no list
+patient.Cases.Name                  # patient.Cases is a list and therefore has no direct attributes
 ```
 
 ### `parameter_error`
 
 Everytime a RayStation method is used it will be checked if wrong keyword arguments were used.
-If for example an imaginary method called `setPatientName()` used a parameter called `name` in RayStation v5 which was renamed to `patient_name` in v6 a developer could take hours to recognize why the method doesn't have the desired effect. The RSStaticCodeChecker will recognize the error and lead you to the right solution by showing the documentation of the method.
+If for example an imaginary method called `setPatientName()` used a parameter called `name` in RayStation v5 which was renamed to `patient_name` in v6 a developer could take hours to recognize why the method doesn't have the desired effect. The RSStaticCodeChecker will recognize the error and lead you to the right solution by showing the documentation of the method before running your scripts.
 
 Unfortunately RayStation doesn't document which parameters are optional / mandatory in a proper way.
-That's why the code analysis will also generate errors when you don't define all keyword arguments (no matter if mandatory or optional).
+That's why the code analysis will also generate errors when you don't define all keyword arguments - no matter if mandatory or optional.
 Sending rather too much errors than too few errors was a decision made because we think ignoring a line takes less time than the time consuming process of starting a RayStation terminal, finding an error and then reading all the docs to find the parameter that was missing.
 The score of these types of errors will be higher (which means less important, see "Score" section for more information).
 Take a look at the "Ignore code" section for further information on how to ignore these lines of code for the RSStaticCodeChecker.
@@ -55,11 +55,11 @@ Each error will be generated with a score. As a rule of thumb one can say:
 
 **High score => UNPRECISE MATCH / LESS IMPORTANT**
 
-The score contains a mixture of heuristics concerning:
+More specifically the score contains a mixture of heuristics concerning:
 
   - The importance of the error 
   - The probability to cause a crash or wrong behaviour in your runtime environment (e.g. wrongly spelled parameters have a lower score than missing parameters that might be optional anyways)
-  - The probability of the error to actually be a proper match (e.g. `patient.WrongAttr` has a lower score than `cpat.WrongAttr`)
+  - The probability of the error to actually be a proper match (e.g. `patient.WrongAttr` has a lower score than `cpat.WrongAttr`... also longer sequences of attribute matches lower the score, e.g. cpat.Cases[0].TreatmentPlans[0].BeamSets[0].Beams.WrongAttr has a higher score than cpat.WrongAttr).
 
 ## Use the Static Code Checker Client Command Line Tool
 ### Check folder
@@ -88,14 +88,25 @@ Add a `--processes <p>` argument to define the maximum of processes that may run
 2.	Add `--html` argument and write True behind it
 (e.g. `> rs_code_scanner --folder "C:/somewhere/" --output "C:/results.html" --html True`)
 
-### Using the VSCode extension
+### Using the [VSCode](https://code.visualstudio.com/) extension
 
+To use the RSStaticCodeChecker within [VSCode](https://code.visualstudio.com/) just press
 
+```
+CTRL + SHIFT + P
+```
+
+and select `Run RSCodeChecker on current file` or `Run RSCodeChecker on workspace`.
+
+A new window will open on the right hand side of the window showing a loading animation. At the same time a CMD prompt will open. This is the server. You can just minimize and ignore it. But you will have to leave it open.
+
+The scan could take a while, especially if you're checking the whole workspace (up to several minutes) - maybe just grab a cup of coffee or actually talk to your co-workers about their weekend face to face.
 
 ### Ignore code
 
 Sometimes the code analysis generates false positives (errors that are not actually errors).
 You might want to ignore these types of errors (instead of for example renaming all your variables).
+
 As an example the variable name `patient_list` will be interpreted as a Patient object which will result in errors when accessing it like a list.
 
 Error types can be ignored in the next line by using this:
