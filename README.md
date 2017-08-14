@@ -100,7 +100,7 @@ and select `Run RSCodeChecker on current file` or `Run RSCodeChecker on workspac
 
 A new window will open on the right hand side of the window showing a loading animation. At the same time a CMD prompt will open. This is the server. You can just minimize and ignore it. But you will have to leave it open.
 
-The scan could take a while, especially if you're checking the whole workspace (up to several minutes) - maybe just grab a cup of coffee or actually talk to your co-workers about their weekend face to face.
+The scan could take a while, especially if you're checking the whole workspace (up to several minutes) - maybe just grab a cup of coffee or actually talk to your co-workers about their weekend.
 
 ### Ignore code
 
