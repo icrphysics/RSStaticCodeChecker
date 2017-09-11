@@ -81,7 +81,7 @@ def server_is_up():
     s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
     up = False
     try:
-        s.bind(("127.0.0.1", client_lib_config.get_port()))
+        s.bind(("0.0.0.0", client_lib_config.get_port()))
     except socket.error as e:
         up = True
         if e.errno == 98:
