@@ -5,4 +5,4 @@ if __name__ == "__main__":
     init_app(app)
 
 print "Trying to start on port {}".format(app.config["PORT"])
-app.run(port = app.config["PORT"])
+app.run(port = app.config["PORT"], host="0.0.0.0")
