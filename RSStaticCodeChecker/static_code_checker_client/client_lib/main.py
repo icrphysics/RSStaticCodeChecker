@@ -149,7 +149,7 @@ def main():
     
     if args.output:
         with open(args.output, "w") as f:
-            if args.html:
+            if args.html or args.output.lower().endswith(".html"):
                 import json_to_html_output
                 s = json_to_html_output.to_html(json.dumps(results, indent=4, sort_keys=True, ensure_ascii=False, encoding='utf-8'))
                 f.write(s)
