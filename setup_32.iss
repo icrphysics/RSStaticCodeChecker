@@ -54,7 +54,7 @@ Root: HKCU; Subkey: "Environment"; ValueType:string; ValueName: "RayStationStati
     Root: HKCU; Subkey: "Environment"; ValueType:string; ValueName: "RayStationStaticCodeCheckerServerBat"; \
     ValueData: "{app}\static_code_checker_server\start.bat"; Flags: preservestringtype; Components: main
 Root: HKCU; Subkey: "Environment"; ValueType:string; ValueName: "RayStationStaticCodeCheckerPython"; \
-    ValueData: "{app}\WinPython-32bit\python-2.7.13.amd32\python.exe"; Flags: preservestringtype; Components: main
+    ValueData: "{app}\WinPython-32bit\python-2.7.13\python.exe"; Flags: preservestringtype; Components: main
 Root: HKCU; Subkey: "Environment"; ValueType:string; ValueName: "RSSTATICCODECHECKERVSCODEEXT"; \
     ValueData: "{app}\RSStaticCodeChecker_VSCODE_EXT\rsstaticcodechecker-vscode-ext\rsstaticcodechecker-vscode-ext-0.0.1.vsix"; Flags: preservestringtype; Components: main
 Root: HKLM; Subkey: "SYSTEM\CurrentControlSet\Control\Session Manager\Environment"; \
